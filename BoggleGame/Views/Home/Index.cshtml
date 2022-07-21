@@ -14,7 +14,14 @@
     <h1 class="display-4">Welcome</h1>
     @Html.Label("Lets play with buttons")
     @using (Html.BeginForm("HandleButtonClick", "Home")){
-        for (int i = 0; i < Model.Count; i++)
+            //Creating an array of CHARS
+            char[] fullAlphabet = new char[26];                        
+            for(char c = 'A'; c <= 'Z'; ++c)
+            {
+                fullAlphabet[c - 'A'] = c;
+            }
+            Random rnd = new Random();
+            for (int i = 0; i < Model.Count; i++)
         {
             if (i%5 == 0)
             {
@@ -24,11 +31,14 @@
             <button style = "background-color: lavender" onclick= "changeColor();" type = "submit" name="mine" id="btn" value=@i>
                 @if(Model[i].State == true)
                 {
-                    <label>A</label>
+                        //Randomly assigning letters to the buttons
+                        int rndChar = rnd.Next(0, 25);
+                        char nextChar = fullAlphabet[rndChar];
+                        <label> @nextChar </label>
                 }
                 else
                 {
-                    <label>B</label> 
+                    <label>CLICKED</label> 
                 }
             </button>
         }
