@@ -1,45 +1,45 @@
-﻿
-@model List<BoggleGame.Models.ButtonModel>
+﻿@model List<BoggleGame.Models.ButtonModel>
 
 @{
     ViewData["Title"] = "Home Page";
 }
 <!DOCTYPE html>
 <html>
- <head>
- </head>
- <body>
-    
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    @Html.Label("Lets play with buttons")
-    @using (Html.BeginForm("HandleButtonClick", "Home")){
-        for (int i = 0; i < Model.Count; i++)
+<head>
+</head>
+<body>
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        @Html.Label("Lets play with buttons")
+        @using (Html.BeginForm("HandleButtonClick", "Home"))
         {
-            if (i%5 == 0)
+            for (int i = 0; i < Model.Count; i++)
             {
-                <br />
+                if (i%5 == 0)
+                {
+                    <br />
+                }
+
+                <button style="background-color: lavender" onclick="changeColor();" type="submit" name="mine" id="btn" value=@i>
+                    @if (Model[i].State == true)
+                    {
+                        <span>A</span>
+                    }
+                    else
+                    {
+                        <span>B</span>
+                    }
+                </button>
             }
-
-            <button style = "background-color: lavender" onclick= "changeColor();" type = "submit" name="mine" id="btn" value=@i>
-                @if(Model[i].State == true)
-                {
-                    <label>A</label>
-                }
-                else
-                {
-                    <label>B</label> 
-                }
-            </button>
         }
-    }
 
-</div>
+    </div>
 </body>
 
 @section Scripts
     {
-   
+
     <script src="//cdn.amcharts.com/lib/4/core.js"></script>
     <script src="//cdn.amcharts.com/lib/4/charts.js"></script>
     <script src="//cdn.amcharts.com/lib/4/themes/animated.js"></script>
@@ -49,11 +49,22 @@
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript">
 
-    const btn = document.getElementById('btn');
+        const btn = document.getElementById('btn');
 
-    btn.addEventListener('click', function onClick() {
-    btn.style.backgroundColor = "blue"
-});
+        btn.addEventListener('click', function onClick() {
+            btn.style.backgroundColor = "blue"
+        });
     </script>
-        }
-</html>
+
+    <script>
+        BuildCommonLettersArray();
+        Make16RandomLettersFromCommonLetterArray();
+        // PrintCommonLetters();
+        // Print16LettersArray();
+
+        var letterTest = Get16RandomLettersFromCommonLettersArray();
+        console.log("LETTERS 16 ARRAY: " + letterTest);
+    </script>
+
+    }
+    </html>
