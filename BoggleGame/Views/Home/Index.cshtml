@@ -21,20 +21,39 @@
                 <br />
             }
 
-            <button style = "background-color: lavender" type = "submit" name="mine" value=@i>
-                @if(Model[0].State == true)
+            <button style = "background-color: lavender" onclick= "changeColor();" type = "submit" name="mine" id="btn" value=@i>
+                @if(Model[i].State == true)
                 {
                     <label>A</label>
                 }
-                else if(Model[1].State == false)
+                else
                 {
-                    <label>B</label>
+                    <label>B</label> 
                 }
             </button>
         }
     }
 
-
 </div>
 </body>
+
+@section Scripts
+    {
+   
+    <script src="//cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="//cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="//cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.css" rel="stylesheet" />
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript">
+
+    const btn = document.getElementById('btn');
+
+    btn.addEventListener('click', function onClick() {
+    btn.style.backgroundColor = "blue"
+});
+    </script>
+        }
 </html>
