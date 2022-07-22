@@ -3,10 +3,10 @@
 
 // Write your JavaScript code.
 
-
 // an array of common letters
 var commonLettersArray = [];
 var letters16Array = [];
+
 
 function AddToArrayOfCommonLetters(limit, letter) {
 
