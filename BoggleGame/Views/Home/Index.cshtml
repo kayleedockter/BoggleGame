@@ -6,65 +6,75 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 </head>
 <body>
 
     <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        @Html.Label("Lets play with buttons")
-        @using (Html.BeginForm("HandleButtonClick", "Home"))
-        {
-            for (int i = 0; i < Model.Count; i++)
-            {
-                if (i%5 == 0)
-                {
-                    <br />
-                }
+        <div>
+            Welcome
 
-                <button style="background-color: lavender" onclick="changeColor();" type="submit" name="mine" id="btn" value=@i>
-                    @if (Model[i].State == true)
-                    {
-                        <span>A</span>
-                    }
-                    else
-                    {
-                        <span>B</span>
-                    }
-                </button>
-            }
-        }
+            <div class="grid-container">
+                <button id="btnClick1" class="btn1">R</button>
+                <button id="btnClick2" class="btn2">S</button>
+                <button id="btnClick3" class="btn3">T</button>
+                <button id="btnClick4" class="btn4">L</button>
+                <button id="btnClick5" class="btn5">N</button>
+                <button id="btnClick6" class="btn6">E</button>
+                <button id="btnClick7" class="btn7">R</button>
+                <button id="btnClick8" class="btn8">S</button>
+                <button id="btnClick9" class="btn9">T</button>
+                <button id="btnClick10" class="btn10">L</button>
+                <button id="btnClick11" class="btn11">N</button>
+                <button id="btnClick12" class="btn12">E</button>
+                <button id="btnClick13" class="btn13">R</button>
+                <button id="btnClick14" class="btn14">S</button>
+                <button id="btnClick15" class="btn15">T</button>
+                <button id="btnClick16" class="btn16">E</button>
+            </div>
+
+        </div>
+
+        <div>
+            <button id="btnPlayGame">Play Game</button>
+
+            <button id="btnSubmitWord">Submit Word</button>
+        </div>
 
     </div>
+
+
+
 </body>
 
-@section Scripts
-    {
+@section Scripts{
 
-    <script src="//cdn.amcharts.com/lib/4/core.js"></script>
-    <script src="//cdn.amcharts.com/lib/4/charts.js"></script>
-    <script src="//cdn.amcharts.com/lib/4/themes/animated.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.css" rel="stylesheet" />
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script type="text/javascript">
+        <script src="//cdn.amcharts.com/lib/4/core.js"></script>
+        <script src="//cdn.amcharts.com/lib/4/charts.js"></script>
+        <script src="//cdn.amcharts.com/lib/4/themes/animated.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.css" rel="stylesheet" />
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-        const btn = document.getElementById('btn');
+        <script>
+            BuildCommonLettersArray();
+            //Make16RandomLettersFromCommonLetterArray();
+            // PrintCommonLetters();
+            // Print16LettersArray();
 
-        btn.addEventListener('click', function onClick() {
-            btn.style.backgroundColor = "blue"
-        });
-    </script>
+           // var letters = Get16RandomLetters();
+            // console.log("LETTERS 16 ARRAY: " + letters);
+            
+            
+            
 
-    <script>
-        BuildCommonLettersArray();
-        Make16RandomLettersFromCommonLetterArray();
-        // PrintCommonLetters();
-        // Print16LettersArray();
+            // LoadLettersToBoard();// call this function in the js file when the Play Game button is clicked
 
-        var letterTest = Get16RandomLettersFromCommonLettersArray();
-        console.log("LETTERS 16 ARRAY: " + letterTest);
-    </script>
 
-    }
-    </html>
+        </script>
+
+ }
+
+
+ </html>

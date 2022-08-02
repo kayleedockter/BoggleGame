@@ -16,3 +16,46 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* style sheet for boogle game */
+
+.grid-container {
+    justify-items: center;
+    display: grid;
+    grid-template-columns: auto auto auto auto; /*creates four columns*/
+    padding: 1px;
+    width: 38px;
+}
+
+
+.btn1,
+.btn2,
+.btn2,
+.btn3,
+.btn4,
+.btn5,
+.btn6,
+.btn7,
+.btn8,
+.btn9,
+.btn10,
+.btn11,
+.btn12,
+.btn13,
+.btn14,
+.btn15,
+.btn16 {
+    border-radius: 15px;
+    text-align: center;
+    background-color: #AB12CD;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 30px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 30px;
+}
+
