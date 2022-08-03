@@ -6,40 +6,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
 
     <div class="text-center">
         <div>
-            Welcome
+            <h1>Welcome to the Boggle Game</h1>
+            <br />
 
-            <div class="grid-container">
-                <button id="btnClick1" class="btn1">R</button>
-                <button id="btnClick2" class="btn2">S</button>
-                <button id="btnClick3" class="btn3">T</button>
-                <button id="btnClick4" class="btn4">L</button>
-                <button id="btnClick5" class="btn5">N</button>
-                <button id="btnClick6" class="btn6">E</button>
-                <button id="btnClick7" class="btn7">R</button>
-                <button id="btnClick8" class="btn8">S</button>
-                <button id="btnClick9" class="btn9">T</button>
-                <button id="btnClick10" class="btn10">L</button>
-                <button id="btnClick11" class="btn11">N</button>
-                <button id="btnClick12" class="btn12">E</button>
-                <button id="btnClick13" class="btn13">R</button>
-                <button id="btnClick14" class="btn14">S</button>
-                <button id="btnClick15" class="btn15">T</button>
-                <button id="btnClick16" class="btn16">E</button>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <button id="btnClick1" class="btn1">R</button>
+                        <button id="btnClick2" class="btn2">S</button>
+                        <button id="btnClick3" class="btn3">T</button>
+                        <button id="btnClick4" class="btn4">L</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button id="btnClick5" class="btn5">N</button>
+                        <button id="btnClick6" class="btn6">E</button>
+                        <button id="btnClick7" class="btn7">R</button>
+                        <button id="btnClick8" class="btn8">S</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button id="btnClick9" class="btn9">T</button>
+                        <button id="btnClick10" class="btn10">L</button>
+                        <button id="btnClick11" class="btn11">N</button>
+                        <button id="btnClick12" class="btn12">E</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button id="btnClick13" class="btn13">R</button>
+                        <button id="btnClick14" class="btn14">S</button>
+                        <button id="btnClick15" class="btn15">T</button>
+                        <button id="btnClick16" class="btn16">E</button>
+                    </div>
+                </div>
+                <br />
+
+
+
+
             </div>
 
         </div>
 
         <div>
-            <button id="btnPlayGame">Play Game</button>
+            <button type="button" class="btn btn-primary mb-2" id="btnPlayGame">Play Game</button>
 
-            <button id="btnSubmitWord">Submit Word</button>
+            <button type="button" class="btn btn-success mb-2" id="btnSubmitWord">Submit Word</button>
         </div>
+        <p>Select connected letters to create words. Click "Submit Word" when you think you have a word. Watch your time as your on the clock. Race your opponent to get the most points. Good luck!</p>
 
     </div>
 
@@ -49,32 +72,33 @@
 
 @section Scripts{
 
-        <script src="//cdn.amcharts.com/lib/4/core.js"></script>
-        <script src="//cdn.amcharts.com/lib/4/charts.js"></script>
-        <script src="//cdn.amcharts.com/lib/4/themes/animated.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.css" rel="stylesheet" />
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="//cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="//cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="//cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.css" rel="stylesheet" />
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-        <script>
-            // BuildCommonLettersArray();
-            //Make16RandomLettersFromCommonLetterArray();
-            // PrintCommonLetters();
-            // Print16LettersArray();
+    <script>
+        BuildCommonLettersArray();
+                            //Make16RandomLettersFromCommonLetterArray();
+                            // PrintCommonLetters();
+                            // Print16LettersArray();
 
-           // var letters = Get16RandomLetters();
-            // console.log("LETTERS 16 ARRAY: " + letters);
-            
-            
-            
-
-            // LoadLettersToBoard();// call this function in the js file when the Play Game button is clicked
+                           // var letters = Get16RandomLetters();
+                            // console.log("LETTERS 16 ARRAY: " + letters);
 
 
-        </script>
+
+
+                            // LoadLettersToBoard();// call this function in the js file when the Play Game button is clicked
+
+
+    </script>
 
  }
 
 
- </html>
+    </html>
