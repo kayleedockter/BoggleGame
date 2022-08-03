@@ -6,20 +6,59 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
 
     <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        @Html.Label("Lets play with buttons")
-        @using (Html.BeginForm("HandleButtonClick", "Home"))
-        {
-            for (int i = 0; i < Model.Count; i++)
-            {
-                if (i%5 == 0)
-                {
-                    <br />
-                }
+        <div>
+            <h1>Welcome to the Boggle Game</h1>
+            <br />
+
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <button id="btnClick1" class="btn1">R</button>
+                        <button id="btnClick2" class="btn2">S</button>
+                        <button id="btnClick3" class="btn3">T</button>
+                        <button id="btnClick4" class="btn4">L</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button id="btnClick5" class="btn5">N</button>
+                        <button id="btnClick6" class="btn6">E</button>
+                        <button id="btnClick7" class="btn7">R</button>
+                        <button id="btnClick8" class="btn8">S</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button id="btnClick9" class="btn9">T</button>
+                        <button id="btnClick10" class="btn10">L</button>
+                        <button id="btnClick11" class="btn11">N</button>
+                        <button id="btnClick12" class="btn12">E</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button id="btnClick13" class="btn13">R</button>
+                        <button id="btnClick14" class="btn14">S</button>
+                        <button id="btnClick15" class="btn15">T</button>
+                        <button id="btnClick16" class="btn16">E</button>
+                    </div>
+                </div>
+                <br />
+
+
+
+
+            </div>
+
+        </div>
+
+        <div>
+            <button type="button" class="btn btn-primary mb-2" id="btnPlayGame">Play Game</button>
 
                 <button style="background-color: lavender" onclick="changeColor();" type="submit" name="mine" id="btn" value=@i>
                     @if (Model[i].State == true)
@@ -37,10 +76,12 @@
        <div class="timer">                         
        </div>
     </div>
+
+
+
 </body>
 
-@section Scripts
-    {
+@section Scripts{
 
     <script src="//cdn.amcharts.com/lib/4/core.js"></script>
     <script src="//cdn.amcharts.com/lib/4/charts.js"></script>
@@ -61,13 +102,22 @@
 
     <script>
         BuildCommonLettersArray();
-        Make16RandomLettersFromCommonLetterArray();
-        // PrintCommonLetters();
-        // Print16LettersArray();
+                            //Make16RandomLettersFromCommonLetterArray();
+                            // PrintCommonLetters();
+                            // Print16LettersArray();
 
-        var letterTest = Get16RandomLettersFromCommonLettersArray();
-        console.log("LETTERS 16 ARRAY: " + letterTest);
+                           // var letters = Get16RandomLetters();
+                            // console.log("LETTERS 16 ARRAY: " + letters);
+
+
+
+
+                            // LoadLettersToBoard();// call this function in the js file when the Play Game button is clicked
+
+
     </script>
 
-    }
+ }
+
+
     </html>
