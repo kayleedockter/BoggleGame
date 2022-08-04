@@ -62,7 +62,7 @@ function PrintLengthOfCommonLetters() {
 }
 
 
-// -> returns a string array of 16 random letters from the common letters array
+// -> builds an string array of 16 random letters from the common letters array
 function Make16RandomLettersFromCommonLetterArray() {
     // var str = commonLettersArray.toString();
 
@@ -70,7 +70,12 @@ function Make16RandomLettersFromCommonLetterArray() {
     //console.log("TESTING: " + commonLettersArray[200]);
     //-----
 
+    // clears the array of any letters from the previous 16-letter array
+    while (!(letters16Array.length === 0)) { 
+        letters16Array.pop();
+    }
 
+    // build a new array of 16 random letters
     for (let i = 0; i < 16; i++) {
 
         var random = Math.floor(Math.random() * commonLettersArray.length) + 1;
@@ -96,8 +101,6 @@ function Print16LettersArray() {
 
 
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 
@@ -514,7 +517,8 @@ btnPlayGame.addEventListener('click', function PlayGame() {
     // TODO MAKE SURE THAT THERE ARE TWO PLAYERS
     // TODO CHECK THEIR IDS
     // DON'T ACTUALLLY START THE GAME UNTIL THERE ARE TWO PLAYERS
-    Clear16LetterFrom16LettersArray();
+    /*Clear16LetterFrom16LettersArray();*/
+    var commonLettersArray = [];
     Make16RandomLettersFromCommonLetterArray();
     var v = Get16RandomLetters();
     console.log("letters are: " + v);
@@ -526,12 +530,12 @@ btnPlayGame.addEventListener('click', function PlayGame() {
 });
 
 
-function Clear16LetterFrom16LettersArray() {
+/*function Clear16LetterFrom16LettersArray() {
 
     for (let i = 0; i < letters16Array; i++) {
         letters16Array[i] = null;
     }
-}
+}*/
 
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
@@ -632,8 +636,7 @@ class ButtonNode {
 
 }
 
-//
-
+BuildCommonLettersArray();
 CreateNodes();
 MakeAllValidEdgeConnections();
 
