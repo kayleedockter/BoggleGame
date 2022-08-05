@@ -50,28 +50,18 @@
                 </div>
                 <br />
 
-
-
-
             </div>
+
+            <div>
+        <button type="button" class="btn btn-primary mb-2" id="btnPlayGame">Play Game</button>
+
+        <button type="button" class="btn btn-success mb-2" id="btnSubmitWord">Submit Word</button>
+
+        <label id="guessWord">WORD_</label>
+    </div>
 
         </div>
 
-        <div>
-            <button type="button" class="btn btn-primary mb-2" id="btnPlayGame">Play Game</button>
-
-                <button style="background-color: lavender" onclick="changeColor();" type="submit" name="mine" id="btn" value=@i>
-                    @if (Model[i].State == true)
-                    {
-                        <span>A</span>
-                    }
-                    else
-                    {
-                        <span>B</span>
-                    }
-                </button>
-            }
-        }
         <!--DON'T DELETE THIS-->
        <div class="timer">                         
        </div>
