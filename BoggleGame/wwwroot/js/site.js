@@ -51,7 +51,7 @@ function DisplayCurrentGuessWord() {
             strArray[i] = buttonNodes16Array[i].getLetterValue;
         }
     }
-    document.getElementById("guessWord").innerHTML = strArray;
+    document.getElementById("guessWord").innerHTML = strArray.toString().replaceAll(',', '');
 }
 
 function ClearNodesFromButtonNodesArray() {
