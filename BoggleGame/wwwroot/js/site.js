@@ -19,6 +19,12 @@ function RemoveButtonNodeFromButtonNodeArray() {
     return buttonNodes16Array.pop();
 }
 
+function RemoveAllButtonNodesFromButtonNodesArray() {
+    while (!(buttonNodes16Array.length === 0)) {
+        RemoveButtonNodeFromButtonNodeArray();
+    }
+}
+
 function SetButtonNodeIsClicked(btnNode) {
     btnNode.setBtnIsClicked(btnNode);
 }
@@ -52,12 +58,6 @@ function DisplayCurrentGuessWord() {
         }
     }
     document.getElementById("guessWord").innerHTML = strArray.toString().replaceAll(',', '');
-}
-
-function ClearNodesFromButtonNodesArray() {
-    while (!(buttonNodes16Array.length === 0)) {
-        buttonNodes16Array.pop();
-    }
 }
 
 function AddToArrayOfCommonLetters(limit, letter) {
@@ -182,22 +182,7 @@ var btnSubmitWord = document.getElementById('btnSubmitWord');
 var btnPlayGame = document.getElementById('btnPlayGame');
 
 // preset all of the background colors to the light purple:  "#AB12CD";
-btnClicked1.style.backgroundColor = "#AB12CD";
-btnClicked2.style.backgroundColor = "#AB12CD";
-btnClicked3.style.backgroundColor = "#AB12CD";
-btnClicked4.style.backgroundColor = "#AB12CD";
-btnClicked5.style.backgroundColor = "#AB12CD";
-btnClicked6.style.backgroundColor = "#AB12CD";
-btnClicked7.style.backgroundColor = "#AB12CD";
-btnClicked8.style.backgroundColor = "#AB12CD";
-btnClicked9.style.backgroundColor = "#AB12CD";
-btnClicked10.style.backgroundColor = "#AB12CD";
-btnClicked11.style.backgroundColor = "#AB12CD";
-btnClicked12.style.backgroundColor = "#AB12CD";
-btnClicked13.style.backgroundColor = "#AB12CD";
-btnClicked14.style.backgroundColor = "#AB12CD";
-btnClicked15.style.backgroundColor = "#AB12CD";
-btnClicked16.style.backgroundColor = "#AB12CD";
+ResetAllButtonColorsToPurple();
 
 // CREATES ALL THE BUTTON NODES FOR THE GAME BOARD //
 function CreateNodes() {
@@ -979,9 +964,44 @@ btnClicked16.addEventListener('click', function ButtonClicked() {
 });
 
 btnSubmitWord.addEventListener('click', function SubmitWord() {
+    // grabs the guess word from the screen 
+    var sendGuessWord = document.getElementById("guessWord").innerHTML;
 
+    // sends the guess word from the screen
+    // TODO 
+
+    // clears the letters to all be light purple
+    ResetAllButtonColorsToPurple();
+
+    // resets the array of button nodes to empty
+    RemoveAllButtonNodesFromButtonNodesArray();
+
+    // CONVICE MYSELF THE BUTTON NODES ARRAY IS EMPTY
+    PrintButtonNodesArray();
+
+    // clears the guess word in the inner html
+    document.getElementById("guessWord").innerHTML = "_";
 
 });
+
+function ResetAllButtonColorsToPurple() {
+    btnClicked1.style.backgroundColor = "#AB12CD";
+    btnClicked2.style.backgroundColor = "#AB12CD";
+    btnClicked3.style.backgroundColor = "#AB12CD";
+    btnClicked4.style.backgroundColor = "#AB12CD";
+    btnClicked5.style.backgroundColor = "#AB12CD";
+    btnClicked6.style.backgroundColor = "#AB12CD";
+    btnClicked7.style.backgroundColor = "#AB12CD";
+    btnClicked8.style.backgroundColor = "#AB12CD";
+    btnClicked9.style.backgroundColor = "#AB12CD";
+    btnClicked10.style.backgroundColor = "#AB12CD";
+    btnClicked11.style.backgroundColor = "#AB12CD";
+    btnClicked12.style.backgroundColor = "#AB12CD";
+    btnClicked13.style.backgroundColor = "#AB12CD";
+    btnClicked14.style.backgroundColor = "#AB12CD";
+    btnClicked15.style.backgroundColor = "#AB12CD";
+    btnClicked16.style.backgroundColor = "#AB12CD";
+}
 
 btnPlayGame.addEventListener('click', function PlayGame() {
     // TO SOMEHOW ASSOCIATE THE SIGNAL R TO THIS PLAY GAME EVENT
