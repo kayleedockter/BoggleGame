@@ -9,6 +9,8 @@
             control: root.querySelector(".timer__btn--control"),
         };
 
+        //Assigning the play game button to a variable
+        var buttonPlay = document.getElementById('btnPlayGame');
         this.interval = null;
         this.remainingSeconds = 60;
         this.start();
@@ -16,7 +18,8 @@
 
         this.updateInterfaceTime();
 
-        this.el.control.addEventListener("click", () => {
+        //Play game button now starts the timer
+        buttonPlay.addEventListener("click", () => {
             if (this.interval === null) {
                 this.start();
             } else {
@@ -25,7 +28,7 @@
         });
     }
 
-    //UPdates the minutes and seconds in the HTML
+    //Updates the minutes and seconds in the HTML
     updateInterfaceTime() {
         const minutes = Math.floor(this.remainingSeconds / 60);
         const seconds = this.remainingSeconds % 60;
@@ -60,7 +63,7 @@
             <span class="timer__part">:</span>
             <span class="timer__part timer__part--seconds">00</span>
             <br />
-            <button type="button" class="timer__btn timer__btn--control timer__btn--start">Start</button>
+           
         `;
     }
 }
