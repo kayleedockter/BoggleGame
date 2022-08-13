@@ -963,12 +963,15 @@ btnClicked16.addEventListener('click', function ButtonClicked() {
     DisplayCurrentGuessWord();
 });
 
+
+
 btnSubmitWord.addEventListener('click', function SubmitWord() {
     // grabs the guess word from the screen 
     var sendGuessWord = document.getElementById("guessWord").innerHTML;
 
     // sends the guess word from the screen
-    // TODO 
+    
+   
 
     // clears the letters to all be light purple
     ResetAllButtonColorsToPurple();

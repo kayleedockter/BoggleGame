@@ -56,11 +56,15 @@
 
             <div>
                 <button type="button" class="btn btn-primary mb-2" id="btnPlayGame">Play Game</button>
+                <form id="form1" runat="server">
+                    <button type="button" class="btn btn-success mb-2" id="btnSubmitWord">Submit Word</button>
+                </form>
+                <br />
 
-                <button type="button" class="btn btn-success mb-2" id="btnSubmitWord">Submit Word</button>
-
-        <label id="guessWord"></label>
-    </div>
+                <label id="guessWord"></label>
+                <br />
+                <label id="points"></label>
+            </div>
 
         </div>
 
@@ -85,24 +89,26 @@
     <script src="js/main.js" type="module"></script>
 
     <script>
-          // call the function to build the nodes //
-        // CreateNodes();
-        // MakeAllValidEdgeConnections();
+        
 
-        // print out the nodes //
-        // PrintButtonName(btnNode1);
-        // PrintSpecifiedButtonIndeces(btnNode1);
 
-        // AddButtonNodeToButtonNodeArray(btnNode1);
-        // AddButtonNodeToButtonNodeArray(btnNode2);
-        // AddButtonNodeToButtonNodeArray(btnNode3);
-
-        // PrintButtonNodesArray();
-        // console.log("------------------------------");
-
-        // RemoveButtonNodeFromButtonNodeArray(); // pops number 3
-
-        // PrintButtonNodesArray();
+        $("#btnSubmitWord").click(function() {
+            var sendGuessWord = document.getElementById("guessWord").innerHTML;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Submit","Home")',
+                data: { "word": sendGuessWord },
+                contentType: 'application/x-www-form-urlencoded',
+                dataType: "json",
+                headers:
+                {
+                    "RequestVerificationToken": $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                success: function(message) {
+                    document.getElementById("points").innerHTML = message;
+                }
+            });
+        });
     </script>
  }
 
