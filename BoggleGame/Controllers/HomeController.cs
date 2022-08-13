@@ -70,10 +70,61 @@ namespace BoggleGame.Controllers
             }
             else
             {
-                //TODO: Scoring function call
-                return new JsonResult("Test successful! " + word + " has been recieved!"); //DELETE THIS; FOR TESTING
+                int points = Scoring(word);
+                if (points == 0)
+                {
+                    return new JsonResult("Sorry, that word is too short!");
+                }
+                else
+                {
+                    return new JsonResult("Scored " + points + " points with the word " + word);
+                }
+                
             }
 
+        }
+
+        //******HELPER FUNCTIONS
+
+        private int Scoring(string word)
+        {
+            int point = 0;
+            int len = word.Length;
+
+            if (len >= 9)
+            {
+                point = 15;
+            }
+            else if (len == 8)
+            {
+                point = 10;
+            }
+            else if (len == 7)
+            {
+                point = 8;
+            }
+            else if (len == 6)
+            {
+                point = 6;
+            }
+            else if (len == 5)
+            {
+                point = 4;
+            }
+            else if (len == 4)
+            {
+                point = 2;
+            }
+            else if (len == 3)
+            {
+                point = 1;
+            }
+            else
+            {
+                point = 0;
+            }
+
+            return point;
         }
     }
 }
