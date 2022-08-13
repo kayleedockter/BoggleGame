@@ -982,8 +982,7 @@ btnSubmitWord.addEventListener('click', function SubmitWord() {
     // CONVICE MYSELF THE BUTTON NODES ARRAY IS EMPTY
     PrintButtonNodesArray();
 
-    // clears the guess word in the inner html
-    document.getElementById("guessWord").innerHTML = "_";
+    
 
 });
 

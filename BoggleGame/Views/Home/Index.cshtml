@@ -106,6 +106,8 @@
                 },
                 success: function(message) {
                     document.getElementById("points").innerHTML = message;
+                    // clears the guess word in the inner html
+                    document.getElementById("guessWord").innerHTML = "_";
                 }
             });
         });

@@ -71,7 +71,7 @@ namespace BoggleGame.Controllers
             else
             {
                 //TODO: Scoring function call
-                return new JsonResult("Test successful!" + word + " has been recieved!"); //DELETE THIS; FOR TESTING
+                return new JsonResult("Test successful! " + word + " has been recieved!"); //DELETE THIS; FOR TESTING
             }
 
         }
