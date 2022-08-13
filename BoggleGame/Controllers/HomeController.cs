@@ -44,9 +44,11 @@ namespace BoggleGame.Controllers
             buttons[buttonNumber].State = !buttons[buttonNumber].State;
             return View("Index", buttons);
         }
+
         //This method accepts the word that is generated from user clicks on the front end, query's the db to see if the word exists. If it exists, 
         //it will call the scoring function
-        public IActionResult Submit(string word)
+        [HttpPost]
+        public ActionResult Submit(string word)
         {
             
             //Connecting to DB
@@ -58,19 +60,18 @@ namespace BoggleGame.Controllers
             //Holds return object
             object obj;
 
-            //string query = "SELECT * FROM [dbo].[Words] WHERE words LIKE '" + word + "';"; 
-            string query = "SELECT * FROM [dbo].[Words] WHERE words LIKE 'cat';"; //For testing; delete this and uncomment line above when done ^^
+            string query = "SELECT * FROM [dbo].[Words] WHERE words LIKE '" + word + "';"; 
             SqlCommand cmd = new SqlCommand(query, conn);
             obj = cmd.ExecuteScalar();
 
             if (obj == null)
             {
-                return Content("Not a word!");
+                return new JsonResult("Sorry, not a word!");
             }
             else
             {
                 //TODO: Scoring function call
-                return Content("Success"); //DELETE THIS; FOR TESTING
+                return new JsonResult("Test successful! " + word + " has been recieved!"); //DELETE THIS; FOR TESTING
             }
 
         }
