@@ -46,6 +46,7 @@ namespace SignalRChat.Hubs
         public async Task PlayGame()
         {
             await Clients.All.SendAsync("ShowBoggle");
+            //await Clients.All.SendAsync("TimerStart");
         }
 
         public async Task Submit(string word)
