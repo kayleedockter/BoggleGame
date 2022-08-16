@@ -71,6 +71,10 @@
         <!--DON'T DELETE THIS-->
         <div class="timer">
         </div>
+        <div class="Scores">
+                <div class="col" id="score1"> Player 1 Score: 0</div>
+                <div class="col" id="score2"> Player 2 Score: 0</div>
+        </div>
     </div>
 
 
@@ -87,30 +91,58 @@
     <link href="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.css" rel="stylesheet" />
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="js/main.js" type="module"></script>
+    <script src="/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/chat.js"></script>
 
+    <!--SignalR Connection-->
+    <script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("/GameHub").build();
+
+        connection.start().then(function () {
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+    </script>
+
+    <!---SUBMITTING--->
     <script>
         
-
-
         $("#btnSubmitWord").click(function() {
-            var sendGuessWord = document.getElementById("guessWord").innerHTML;
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("Submit","Home")',
-                data: { "word": sendGuessWord },
-                contentType: 'application/x-www-form-urlencoded',
-                dataType: "json",
-                headers:
-                {
-                    "RequestVerificationToken": $('input:hidden[name="__RequestVerificationToken"]').val()
-                },
-                success: function(message) {
-                    document.getElementById("points").innerHTML = message;
-                    // clears the guess word in the inner html
+        var sendGuessWord = document.getElementById("guessWord").innerHTML;
+        $.ajax({
+            type: "POST",
+                    url: '@Url.Action("Submit","Home")',
+            data: { "word": sendGuessWord },
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: "json",
+                    headers:
+            {
+                "RequestVerificationToken": $('input:hidden[name="__RequestVerificationToken"]').val()
+                    },
+            success: function(message) {
+                        document.getElementById("points").innerHTML = message;
+                // clears the guess word in the inner html
                     document.getElementById("guessWord").innerHTML = "";
-                }
+                    }
+                });
             });
-        });
+    </script>
+    <!---Buttons disabled-->
+    <script>
+        connection.on("DisableButtons", function () {
+        document.getElementById("btnPlayGame").disabled = true;
+        document.getElementById("btnSubmitWord").disabled = true; 
+        document.getElementById("points").textContent = "Waiting for 2nd player to join!";
+    });
+    </script>
+
+    <!---Buttons Enabled-->
+    <script>
+        connection.on("EnableButtons", function () {
+        document.getElementById("btnPlayGame").disabled = false;
+        document.getElementById("btnSubmitWord").disabled = false; 
+        document.getElementById("points").textContent = "Click play game!";
+    });
     </script>
  }
 
