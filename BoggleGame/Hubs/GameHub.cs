@@ -71,13 +71,10 @@ namespace SignalRChat.Hubs
 
             if (obj == null)
             {
-                //TODO: JS Function that tells user it is not a wrod
                 await Clients.Client(currentPlayer).SendAsync("notAWord");
             }
             else
-            {
-                //TODO: JS Function that tells user points have been scored
-                
+            {    
                 int points = Scoring(word);
                 if (points == 0)
                 {
@@ -88,7 +85,6 @@ namespace SignalRChat.Hubs
                     UpddatePlayer(points, word);
                     await Clients.All.SendAsync("correctWord", player_one_score, player_two_score, points, word);
                 }
-
             }
         }
 
