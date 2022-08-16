@@ -6,14 +6,15 @@ namespace SignalRChat.Hubs
 {
     public class GameHub : Hub
     {
+        //For database configuration
         private readonly IConfiguration _configuration;
         public GameHub(IConfiguration config)
         {
             this._configuration = config;
         }
 
-        //Keeping track of player
-        
+
+        //Keeping track of players
         public static List<string> playerID = new List<string>();
         public static int playerCount = 0;
         public List<string> player_one_words = new List<string>();
@@ -35,12 +36,7 @@ namespace SignalRChat.Hubs
             else if (playerCount == 2)
             {
                 await Clients.All.SendAsync("EnableButtons");
-            }
-            
-            //TODO: Create JS funciton for disconnected player
-            //TODO: Add word checking into a function here (Can copy "Submit" code from controller with some tweaks)
-            //TODO: Rewrite AJAX function (not needed for this now)
-            //TODO: Write function to add words to player word list and scores (the submit function above will call this)            
+            }            
         }
         
         public async Task PlayGame()
