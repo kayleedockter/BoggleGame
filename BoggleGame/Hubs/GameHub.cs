@@ -43,12 +43,7 @@ namespace SignalRChat.Hubs
             //TODO: Rewrite AJAX function (not needed for this now)
             //TODO: Write function to add words to player word list and scores (the submit function above will call this)            
         }
-
-        public async Task JoinGame(string user, string message)
-        {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
-        }
-
+        
         public async Task PlayGame()
         {
             await Clients.All.SendAsync("ShowBoggle");
@@ -90,9 +85,26 @@ namespace SignalRChat.Hubs
                 }
                 else
                 {
+                    UpddatePlayer(points, word);
                     await Clients.All.SendAsync("correctWord", player_one_score, player_two_score, points, word);
                 }
 
+            }
+        }
+
+        //This function accepts a point value and the submitted word, it increase player points and adds the submitted word into the player's 
+        //word list
+        private void UpddatePlayer(int points, string word)
+        {
+            if (Context.ConnectionId == playerID[0])
+            {
+                player_one_score += points;
+                player_one_words.Add(word);
+            }
+            else if (Context.ConnectionId == playerID[1])
+            {
+                player_two_score += points;
+                player_one_words.Add(word);
             }
         }
 
