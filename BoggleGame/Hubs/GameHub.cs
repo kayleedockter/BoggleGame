@@ -12,7 +12,6 @@ namespace SignalRChat.Hubs
             this._configuration = config;
         }
 
-        public static bool playGame = false;
         //Keeping track of player
         
         public static List<string> playerID = new List<string>();
@@ -83,7 +82,8 @@ namespace SignalRChat.Hubs
                 else
                 {
                     UpddatePlayer(points, word);
-                    await Clients.All.SendAsync("correctWord", player_one_score, player_two_score, points, word);
+                    await Clients.All.SendAsync("scores", player_one_score, player_two_score);
+                    await Clients.Client(currentPlayer).SendAsync("correctWord", points);
                 }
             }
         }

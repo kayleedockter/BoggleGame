@@ -163,11 +163,18 @@
             document.getElementById("userPrompt").textContent = "That word is too short to score!";
        });
        //Correct word
-        connection.on("correctWord", function(player_one_score, player_two_score, points, word) {        
+        connection.on("correctWord", function(points) {        
             document.getElementById("userPrompt").textContent = "You scored " + points + "!";
+            
+       });
+        //Update Scores
+        connection.on("scores", function(player_one_score, player_two_score) {        
             document.getElementById("score1").innerHTML = "Player 1 score: " + player_one_score;
             document.getElementById("score2").innerHTML = "Player 2 score: " + player_two_score;
+            
        });
+
+       
     </script>
     <script>
         
