@@ -12,7 +12,9 @@ namespace SignalRChat.Hubs
             this._configuration = config;
         }
 
+        public static bool playGame = false;
         //Keeping track of player
+        
         public static List<string> playerID = new List<string>();
         public static int playerCount = 0;
         public List<string> player_one_words = new List<string>();
@@ -23,6 +25,7 @@ namespace SignalRChat.Hubs
         //Checking for player count
         public override async Task OnConnectedAsync()
         {
+            await Clients.All.SendAsync("HideBoggle");
             playerID.Add(Context.ConnectionId);
             playerCount++;
             await base.OnConnectedAsync();
@@ -44,6 +47,11 @@ namespace SignalRChat.Hubs
         public async Task JoinGame(string user, string message)
         {
             await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }
+
+        public async Task PlayGame()
+        {
+            await Clients.All.SendAsync("ShowBoggle");
         }
 
         public async Task Submit(string word)

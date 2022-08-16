@@ -17,7 +17,7 @@
             <h1>Welcome to the Boggle Game</h1>
             <br />
 
-            <div class="container">
+            <div class="container" id="buttonGrid">
                 <div class="row mb-2">
                     <div class="col">
                         <button id="btnClick1" class="btn btn-lg mx-1">R</button>
@@ -55,7 +55,7 @@
             </div>
 
             <div>
-                <button type="button" class="btn btn-primary mb-2" id="btnPlayGame">Play Game</button>
+                <button type="button" class="btn btn-primary mb-2" id="btnPlayGame" onclick="PlayGame()">Play Game</button>
                 <form id="form1" runat="server">
                     <button type="button" class="btn btn-success mb-2" id="btnSubmitWord" onclick="Submit()">Submit Word</button>
                 </form>
@@ -112,6 +112,10 @@
             connection.invoke("Submit", sendGuessWord)
             document.getElementById("guessWord").innerHTML = "";
         }
+
+        function PlayGame() {
+            connection.invoke("PlayGame")
+        }
         
         
     </script>
@@ -119,36 +123,50 @@
     <!---Buttons disabled-->
     <script>
         connection.on("DisableButtons", function () {
-        document.getElementById("btnPlayGame").disabled = true;
-        document.getElementById("btnSubmitWord").disabled = true; 
-        document.getElementById("userPrompt").textContent = "Waiting for 2nd player to join!";
+            document.getElementById("btnPlayGame").disabled = true;
+            document.getElementById("btnSubmitWord").disabled = true; 
+            document.getElementById("userPrompt").textContent = "Waiting for 2nd player to join!";
     });
     </script>
 
     <!---Buttons Enabled-->
     <script>
         connection.on("EnableButtons", function () {
-        document.getElementById("btnPlayGame").disabled = false;
-        document.getElementById("btnSubmitWord").disabled = false; 
-        document.getElementById("userPrompt").textContent = "Click play game!";
+            document.getElementById("btnPlayGame").disabled = false;
+            document.getElementById("btnSubmitWord").disabled = false; 
+            document.getElementById("userPrompt").textContent = "Click play game!";
+    });
+    </script>
+    <!---Hide Boggle Buttons-->
+    <script>
+        connection.on("HideBoggle", function () {
+            document.getElementById("buttonGrid").style.visibility = "hidden";
+            
+    });
+    </script>
+    <!---Show Boggle Buttons-->
+    <script>
+        connection.on("ShowBoggle", function () {
+            document.getElementById("buttonGrid").style.visibility = "visible";
+            
     });
     </script>
 
      <!---SCORING PROMPTS-->
     <script>
        //Word doesn't exist
-       connection.on("notAWord", function() {        
-        document.getElementById("userPrompt").textContent = "Sorry, that's not a word!";
+        connection.on("notAWord", function() {        
+            document.getElementById("userPrompt").textContent = "Sorry, that's not a word!";
        });
        //Word is too short
-       connection.on("shortWord", function() {        
-        document.getElementById("userPrompt").textContent = "That word is too short to score!";
+        connection.on("shortWord", function() {        
+            document.getElementById("userPrompt").textContent = "That word is too short to score!";
        });
        //Correct word
-       connection.on("correctWord", function(player_one_score, player_two_score, points, word) {        
-        document.getElementById("userPrompt").textContent = "You scored " + points + "!";
-        document.getElementById("score1").innerHTML = "Player 1 score: " + player_one_score;
-        document.getElementById("score2").innerHTML = "Player 2 score: " + player_two_score;
+        connection.on("correctWord", function(player_one_score, player_two_score, points, word) {        
+            document.getElementById("userPrompt").textContent = "You scored " + points + "!";
+            document.getElementById("score1").innerHTML = "Player 1 score: " + player_one_score;
+            document.getElementById("score2").innerHTML = "Player 2 score: " + player_two_score;
        });
     </script>
     <script>
