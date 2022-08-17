@@ -17,8 +17,8 @@ namespace SignalRChat.Hubs
         //Keeping track of players
         public static List<string> playerID = new List<string>();
         public static int playerCount = 0;
-        public List<string> player_one_words = new List<string>();
-        public List<string> player_two_words = new List<string>();
+        public static List<string> player_one_words = new List<string>();
+        public static List<string> player_two_words = new List<string>();
         public static int player_one_score = 0;
         public static int player_two_score = 0;
 
@@ -70,18 +70,28 @@ namespace SignalRChat.Hubs
                 await Clients.Client(currentPlayer).SendAsync("notAWord");
             }
             else
-            {    
-                int points = Scoring(word);
-                if (points == 0)
+            {
+                bool existingWord = false;
+                existingWord = WordExists(word);
+                if (existingWord)
                 {
-                    await Clients.Client(currentPlayer).SendAsync("shortWord");
+                    await Clients.Client(currentPlayer).SendAsync("wordExists");
                 }
                 else
                 {
-                    UpddatePlayer(points, word);
-                    await Clients.All.SendAsync("scores", player_one_score, player_two_score);
-                    await Clients.Client(currentPlayer).SendAsync("correctWord", points);
+                    int points = Scoring(word);
+                    if (points == 0)
+                    {
+                        await Clients.Client(currentPlayer).SendAsync("shortWord");
+                    }
+                    else
+                    {
+                        UpddatePlayer(points, word);
+                        await Clients.All.SendAsync("scores", player_one_score, player_two_score);
+                        await Clients.Client(currentPlayer).SendAsync("correctWord", points);
+                    }
                 }
+                
             }
         }
 
@@ -98,6 +108,27 @@ namespace SignalRChat.Hubs
             {
                 player_two_score += points;
                 player_one_words.Add(word);
+            }
+        }
+
+        //Checks if word has already been submitted
+        private bool WordExists(string word)
+        {
+            if (Context.ConnectionId == playerID[0])
+            {
+                if (player_one_words.Contains(word))
+                {
+                    return true;
+                }
+                else return false;
+            }
+            else
+            {
+                if (player_two_words.Contains(word))
+                {
+                    return true;
+                }
+                else return false;
             }
         }
 

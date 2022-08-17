@@ -17,6 +17,7 @@
             <h1>Welcome to the Boggle Game</h1>
             <br />
 
+
             <div class="container" id="buttonGrid">
                 <div class="row mb-2">
                     <div class="col">
@@ -175,8 +176,10 @@
             document.getElementById("score2").innerHTML = "Player 2 score: " + player_two_score;
             
        });
-
-       
+       //Word already submitted
+        connection.on("wordExists", function() {        
+            document.getElementById("userPrompt").textContent = "You've already submitted that word!";
+       });       
     </script>
     <!--TIMER-->
     <!--From W3 schools timer example, https://www.w3schools.com/howto/howto_js_countdown.asp-->
@@ -213,6 +216,7 @@
                 if (distance < 0) {
                     clearInterval(x);
                     document.getElementById("timer1").innerHTML = "Time's up!";
+                    //location.href = '/location.html'
                 }
             }, 1000);
         }
