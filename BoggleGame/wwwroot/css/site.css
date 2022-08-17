@@ -17,6 +17,9 @@ body {
   margin-bottom: 60px;
 }
 
+.header{
+    color:green;
+}
 
 /* CSS */
 .timer__btn {

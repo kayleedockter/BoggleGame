@@ -1,0 +1,57 @@
+﻿namespace BoggleGame.Views.Home
+* {
+    box-sizing: border-box;
+}
+
+/* Float three columns side by side */
+
+/* Remove extra left and right margins, due to padding in columns */
+.text-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+}
+/* Style the counter cards */
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    padding: 2px;
+    text-align: center;
+    width: 500px;
+    height: 600px;
+    color: purple;
+    background-color: lavender;
+    text-decoration: none;
+    border-style: solid;
+    border-width: 5px;
+    border-color: green;
+}
+
+/*
+.btn {
+    background-color: purple;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+ */  
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+    padding: 2px 16px;
+}
+
