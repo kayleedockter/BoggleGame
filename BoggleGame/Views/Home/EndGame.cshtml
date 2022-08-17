@@ -17,6 +17,7 @@
             <label id="p1Score"></label>
             <br />
             <label id="p1Words"></label>
+            <br />
             <label id="p2Score"></label>
             <br />
             <label id="p2Words"></label>
@@ -49,8 +50,11 @@
     </script>
 
     <script>
-        connection.on("EndResults", function(player_one_score, player_two_score, player_one_words, player_two_words) {        
+        connection.on("EndResults", function(player_one_score, player_one_words, player_two_score, player_two_words) {        
             document.getElementById("p1Score").innerHTML = "Player 1 Final Score: " + player_one_score;
+            document.getElementById("p1Words").innerHTML = "Player 1 Words: " + player_one_words;
+            document.getElementById("p2Score").innerHTML = "Player 2 Final Score: " + player_two_score;
+            document.getElementById("p2Words").innerHTML = "Player 2 Words: " + player_two_words;
             
        }); 
     </script>
