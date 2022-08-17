@@ -78,7 +78,7 @@
         </div>
     </div>
 
-
+    @Html.Hidden("RedirectTo", Url.Action("EndGame", "Home"));
 
 </body>
 
@@ -186,7 +186,7 @@
     <script>
 
         //Time in seconds
-        var timeLimit = 90;
+        var timeLimit = 60;
         
         function StartTime() {
             var currentDate = new Date()
@@ -216,7 +216,8 @@
                 if (distance < 0) {
                     clearInterval(x);
                     document.getElementById("timer1").innerHTML = "Time's up!";
-                    //location.href = '/location.html'
+                    var url = $("#RedirectTo").val();
+                    location.href = url;
                 }
             }, 1000);
         }

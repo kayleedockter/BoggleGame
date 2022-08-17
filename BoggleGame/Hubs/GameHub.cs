@@ -95,6 +95,11 @@ namespace SignalRChat.Hubs
             }
         }
 
+        public async Task EndGame()
+        {
+            await Clients.All.SendAsync("EndResults", player_one_score, player_one_words, player_two_score, player_two_words);
+        }
+
         //This function accepts a point value and the submitted word, it increase player points and adds the submitted word into the player's 
         //word list
         private void UpddatePlayer(int points, string word)
@@ -107,7 +112,7 @@ namespace SignalRChat.Hubs
             else if (Context.ConnectionId == playerID[1])
             {
                 player_two_score += points;
-                player_one_words.Add(word);
+                player_two_words.Add(word);
             }
         }
 
