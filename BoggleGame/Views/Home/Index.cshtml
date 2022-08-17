@@ -17,7 +17,8 @@
             <h1>Welcome to the Boggle Game</h1>
             <br />
 
-            <div class="container">
+
+            <div class="container" id="buttonGrid">
                 <div class="row mb-2">
                     <div class="col">
                         <button id="btnClick1" class="btn btn-lg mx-1">R</button>
@@ -55,25 +56,29 @@
             </div>
 
             <div>
-                <button type="button" class="btn btn-primary mb-2" id="btnPlayGame">Play Game</button>
+                <button type="button" class="btn btn-primary mb-2" id="btnPlayGame" onclick="PlayGame()">Play Game</button>
                 <form id="form1" runat="server">
-                    <button type="button" class="btn btn-success mb-2" id="btnSubmitWord">Submit Word</button>
+                    <button type="button" class="btn btn-success mb-2" id="btnSubmitWord" onclick="Submit()">Submit Word</button>
                 </form>
                 <br />
 
                 <label id="guessWord"></label>
                 <br />
-                <label id="points"></label>
+                <label id="userPrompt"></label>
             </div>
 
         </div>
 
         <!--DON'T DELETE THIS-->
-        <div class="timer">
+        <div id="timer1">
+        </div>
+        <div class="Scores">
+                <div class="col" id="score1"> Player 1 Score: 0</div>
+                <div class="col" id="score2"> Player 2 Score: 0</div>
         </div>
     </div>
 
-
+    @Html.Hidden("RedirectTo", Url.Action("EndGame", "Home"));
 
 </body>
 
@@ -87,30 +92,135 @@
     <link href="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.css" rel="stylesheet" />
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="js/main.js" type="module"></script>
+    <script src="/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/chat.js"></script>
 
+    <!--SignalR Connection-->
+    <script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("/GameHub").build();
+
+        connection.start().then(function () {
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+    </script>
+
+    <!---SUBMITTING--->
     <script>
         
-
-
-        $("#btnSubmitWord").click(function() {
+        function Submit() {
             var sendGuessWord = document.getElementById("guessWord").innerHTML;
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("Submit","Home")',
-                data: { "word": sendGuessWord },
-                contentType: 'application/x-www-form-urlencoded',
-                dataType: "json",
-                headers:
-                {
-                    "RequestVerificationToken": $('input:hidden[name="__RequestVerificationToken"]').val()
-                },
-                success: function(message) {
-                    document.getElementById("points").innerHTML = message;
-                    // clears the guess word in the inner html
-                    document.getElementById("guessWord").innerHTML = "";
+            connection.invoke("Submit", sendGuessWord);
+            document.getElementById("guessWord").innerHTML = "";
+        }
+
+        function PlayGame() {
+            connection.invoke("PlayGame");
+            
+        }
+        
+        
+    </script>
+    <!---UI CHANGES-->
+    <!---Buttons disabled-->
+    <script>
+        connection.on("DisableButtons", function () {
+            document.getElementById("btnPlayGame").disabled = true;
+            document.getElementById("btnSubmitWord").disabled = true; 
+            document.getElementById("userPrompt").textContent = "Waiting for 2nd player to join!";
+    });
+    </script>
+
+    <!---Buttons Enabled-->
+    <script>
+        connection.on("EnableButtons", function () {
+            document.getElementById("btnPlayGame").disabled = false;
+            document.getElementById("btnSubmitWord").disabled = false; 
+            document.getElementById("userPrompt").textContent = "Click play game!";
+    });
+    </script>
+    <!---Hide Boggle Buttons-->
+    <script>
+        connection.on("HideBoggle", function () {
+            document.getElementById("buttonGrid").style.visibility = "hidden";
+            
+    });
+    </script>
+    <!---Show Boggle Buttons and Start Time-->
+    <script>
+        connection.on("ShowBoggle", function () {
+            document.getElementById("buttonGrid").style.visibility = "visible";
+            StartTime();
+            
+    });
+    </script>
+
+     <!---SCORING PROMPTS-->
+    <script>
+       //Word doesn't exist
+        connection.on("notAWord", function() {        
+            document.getElementById("userPrompt").textContent = "Sorry, that's not a word!";
+       });
+       //Word is too short
+        connection.on("shortWord", function() {        
+            document.getElementById("userPrompt").textContent = "That word is too short to score!";
+       });
+       //Correct word
+        connection.on("correctWord", function(points) {        
+            document.getElementById("userPrompt").textContent = "You scored " + points + "!";
+            
+       });
+        //Update Scores
+        connection.on("scores", function(player_one_score, player_two_score) {        
+            document.getElementById("score1").innerHTML = "Player 1 score: " + player_one_score;
+            document.getElementById("score2").innerHTML = "Player 2 score: " + player_two_score;
+            
+       });
+       //Word already submitted
+        connection.on("wordExists", function() {        
+            document.getElementById("userPrompt").textContent = "You've already submitted that word!";
+       });       
+    </script>
+    <!--TIMER-->
+    <!--From W3 schools timer example, https://www.w3schools.com/howto/howto_js_countdown.asp-->
+    <script>
+
+        //Time in seconds
+        var timeLimit = 60;
+        
+        function StartTime() {
+            var currentDate = new Date()
+            //Adding 90 seconds to the current date so we can get our time limit
+            var timeDifference = currentDate.setSeconds(currentDate.getSeconds() + timeLimit)
+            var countDownDate = new Date(timeDifference).getTime();
+
+            // Update the count down every 1 second
+            var x = setInterval(function() {
+
+                // Get today's date and time
+                var now = new Date().getTime();
+
+                // Find the distance between now and the count down date
+                var distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the result in the element with id="demo"
+                document.getElementById("timer1").innerHTML = minutes + ":" + seconds;
+
+                // If the count down is finished, write some text
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("timer1").innerHTML = "Time's up!";
+                    var url = $("#RedirectTo").val();
+                    location.href = url;
                 }
-            });
-        });
+            }, 1000);
+        }
     </script>
  }
 
